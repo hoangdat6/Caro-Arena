@@ -1,0 +1,61 @@
+
+
+.caro_btn {
+    display: flex;
+    justify-content: center;
+    border-radius: 6px;
+    padding: 8px 14px;
+    gap: 10px;
+    animation: pulse 1s linear;
+}
+
+
+.btn_primary {
+    border: 1px solid var(--color-main);
+    background: rgba(255, 255, 255, 0.00);
+    color: var(--color-main);
+}
+
+.btn_primary:hover {
+    fill: #000;
+    opacity: 0.8;
+}
+
+.btn_secondary {
+    background: var(--color-main);
+    border: 1px solid var(--color-main);
+    color: var(--color-text );
+}
+
+.btn_secondary:hover {
+    opacity: 0.8;
+}
+
+.main_page {
+    transition: all 1s ease-in-out;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul, li {
+    list-style: none;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.03);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+.course_card:not(:last-child) {
+    margin-bottom: 20px;
+}

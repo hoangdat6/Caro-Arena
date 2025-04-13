@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8
+    container_name: caroarena-db
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+    ports:
+      - "${MYSQL_PUBLIC_PORT}:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: caroarena-app
+    ports:
+      - "${PUBLIC_PORT}:${PORT}"
+    environment:
+      - PORT=${PORT}
+      - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
+      - SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+      - feUrl=${feUrl}
+      - jwtSecret=${jwtSecret}
+      - jwtExpirationMs=${jwtExpirationMs}
+      - jwtCookieName=${jwtCookieName}
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db-data:
+    driver: local

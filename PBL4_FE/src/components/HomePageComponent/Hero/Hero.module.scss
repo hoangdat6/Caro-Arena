@@ -1,0 +1,30 @@
+@import '../../../styles/scss/mixin.scss';
+
+.hero {
+    background-color: var(--bg-color);
+    text-align: center;
+    padding: 5rem 1rem;
+    color: var(--color-text);
+
+    &__content {
+        h1 {
+            font-size: 2.5rem;
+            color: var(--home-text-color);
+        }
+
+        p {
+            margin-top: 1rem;
+        }
+
+        .hero__button {
+            display: inline-block;
+            margin-top: 15px;
+        }
+    }
+
+    @include respond-to(null, $breakpoint-md) {
+        &__content h1 {
+            font-size: 2rem;
+        }
+    }
+}
